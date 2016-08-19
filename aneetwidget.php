@@ -74,22 +74,26 @@ function addstyle(){
     wp_enqueue_style('plugin-style', plugins_url('style.css', __FILE__));
 }
 
-add_action('wp_enqueue_scripts','styles')
+add_action('wp_enqueue_scripts','styles');
 
 
 //shortcodes
 
 function socialm($atts, $content=null){
     extract(shortcode_atts(
-    'link' => array (
-        'facebook' => 'http://facebook.com', 
-        'instagram' => 'http://instagram.com',
-        'linkedin' => 'http://linkedin.com'
+    array (
+        'title' => 'social media', 
+        'link' => array 
+                ( 'facebook' => 'facebook.com', 
+                 'instag' => 'instagram.com'),
+        'img' => array (
+                    'fbimg' => '/img/facebookicon.png', 
+                    'igimg' => 'img/instagramicon.png')
     ), $atts
     ));
     
     return '<div id="socmedicons"> 
-    <a id="fbbut" href ="' . $linkf . '"><img src="/img/facebookicon.png> </a> </div>'; 
+   <img src=' .$img . '><a href="' . $link. '"/>' . $title . '</a></div>';
 }
 
-add_shortcode('fbbutton', 'fbbutton');
+add_shortcode('socialm', 'socialm');
