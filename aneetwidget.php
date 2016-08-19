@@ -30,17 +30,17 @@ class aneetwidget extends WP_Widget{
 				echo $args['before_title'] . $title . $args['after_title'];
 			} ?>
 	
-					
+<!-- to display the social media buttons -->				
          <div id="socmedarea">
                 <ul>
                     <?php do_shortcode('[buttonfb]')?>
-                </ul>  
+               <br /> </ul>  
                 <ul>
                     <?php do_shortcode('[buttonig]')?>
-                </ul>
+            <br />    </ul>
                 <ul>
                     <?php do_shortcode('[buttonli]')?>
-                </ul>
+           <br/>     </ul>
                 <ul>
                     <?php do_shortcode('[color_all]') ?>
                 </ul>
@@ -87,27 +87,6 @@ function addstyle(){
 add_action('wp_enqueue_scripts','addstyle'); 
 
 
-//shortcodes
-/*
-function socialm($atts, $content=null){
-    extract(shortcode_atts(
-    array (
-        'title' => 'social media', 
-        'link' => array 
-                ( 'facebook' => 'http://facebook.com', 
-                 'instag' => 'http://instagram.com'),
-        'img' => array (
-                    'fbimg' => '/img/facebookicon.png', 
-                    'igimg' => 'img/instagramicon.png')
-    ), $atts
-    ));
-    
-    echo '<div id="socmedicons"> 
-   <a href="' . $link. '">' . $title . '"</a></div>';
-}
-
-add_shortcode('socialm', 'socialm'); */
-
 //facebook
 function buttonfb ($atts, $content = null) 
     {
@@ -126,7 +105,7 @@ function buttonfb ($atts, $content = null)
                 #buttonfb{
                     background-color:' . $buttoncolor . ';
                     color:' . $tcolor . ';
-                    padding: 25px;
+                    padding: 15px;
                 }
                 
             </style> 
@@ -155,7 +134,7 @@ function buttonig ($atts, $content = null)
                     background: -webkit-linear-gradient(to left, #2196f3 , #f44336); /* Chrome 10-25, Safari 5.1-6 */
                     background: linear-gradient(to left, #2196f3 , #f44336); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */;
                     color:' . $tcolor . ';
-                    padding: 25px;
+                    padding: 15px;
                 }
                 
             </style> 
@@ -183,7 +162,7 @@ function buttonli ($atts, $content = null)
                 #buttonli{
                     background-color:' . $buttoncolor . ';
                     color:' . $tcolor . ';
-                    padding: 25px;
+                    padding: 15px;
                 }
                 
             </style> 
@@ -223,17 +202,17 @@ function color_all($atts, $content = null){
 add_shortcode('color_all', 'color_all');  
 
 
-// custom post type
+// creating a custom post type called Special
 add_action( 'init', 'create_post_type' );
 function create_post_type() {
-  register_post_type( 'ahspecial',
+  register_post_type( 'ahawards',
     array(
       'labels' => array(
-        'name' => __( 'Special' ),
-        'singular_name' => __( 'Special Ones' )
+        'name' => __( 'All My Awards' ),
+        'singular_name' => __( 'Awards' )
       ),
       'public' => true,
       'has_archive' => true,
     )
-  );
+    );
 }
