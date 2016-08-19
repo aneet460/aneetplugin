@@ -30,13 +30,11 @@ class aneetwidget extends WP_Widget{
 				echo $args['before_title'] . $title . $args['after_title'];
 			} ?>
 	
-				<div id=fblink> 
 					
                     <ul> 
-                    <?php do_shortcode('[fbbutton]')?>
+                    <?php do_shortcode('[socialm]')?>
                     </ul>
                     
-				</div>
 				<?php  
 					echo $args['after_widget'];
     }
@@ -70,20 +68,28 @@ public function update($new_instance,$old_instance){
 
 add_action('widgets_init', function(){register_widget('aneetwidget');});
 
+
+//Enqueuing plugin stylesheet
+function addstyle(){
+    wp_enqueue_style('plugin-style', plugins_url('style.css', __FILE__));
+}
+
+add_action('wp_enqueue_scripts','styles')
+
+
 //shortcodes
 
-// facebook 
-
-function fbbutton($atts, $content=null){
+function socialm($atts, $content=null){
     extract(shortcode_atts(
-    array (
-        'linkf' => 'http://facebook.com', 
-        'imgf' => '/img/facebookicon.png'
+    'link' => array (
+        'facebook' => 'http://facebook.com', 
+        'instagram' => 'http://instagram.com',
+        'linkedin' => 'http://linkedin.com'
     ), $atts
     ));
     
     return '<div id="socmedicons"> 
-    <a id="fbbut href ="' .linkf . '"src="/img/facebookicon.png> </a> </div>'; 
+    <a id="fbbut" href ="' . $linkf . '"><img src="/img/facebookicon.png> </a> </div>'; 
 }
 
 add_shortcode('fbbutton', 'fbbutton');
